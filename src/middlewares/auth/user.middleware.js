@@ -4,11 +4,11 @@ const HttpStatus = require('http-status-codes');
 const logger = require('../../config/winston');
 
 
-exports.checkUserSession = (req, res, next) => {
+exports.checkUserSession = async (req, res, next) => {
     try{
         if (req.session.user && req.session.user.email) {
             return next();
-        } 
+        }
 
         logger.info('Unauthorised access');
         let status_code = 401;

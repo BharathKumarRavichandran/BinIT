@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 // Importing middlewares
 const authMiddleware = require('../middlewares/auth/user.middleware');
+const centerMiddleware = require('../middlewares/center.middleware');
+
 const checkUserSession = authMiddleware.checkUserSession;
 
 // Importing routers
@@ -16,8 +18,8 @@ const wmcRouter = require('./wmc.router');
 router.use('/auth', authRouter);
 router.use('/bin', checkUserSession, binRouter);
 router.use('/handler', checkUserSession, handlerRouter);
-router.use('/hospi', checkUserSession, hospiRouter);
+router.use('/hospi', checkUserSession, centerMiddleware.checkHospiAccess, hospiRouter);
 router.use('/polybag', checkUserSession, polybagRouter);
-router.use('/wmc', checkUserSession, wmcRouter);
+router.use('/wmc', checkUserSession, centerMiddleware.checkWMCAccess, wmcRouter);
 
 module.exports = router;
