@@ -7,7 +7,7 @@ const config = require('../../config/config');
 const logger = require('../../config/winston');
 
 // Importing models
-const user = require('../../models/user.model');
+const user = require('../../db/models/user.model');
 
 // Importing utils
 

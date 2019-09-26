@@ -8,6 +8,7 @@ router.get('/list/all', polybagController.getList);
 router.post('/add', polybagController.addPolybag);
 
 router.get('/details/get', polybagController.getDetails);
-router.post('/details/update', polybagController.updateDetails);
+router.post('/latlon/update', polybagController.updateLatLon);
+router.post('/status/update', polybagController.updateStatus);
 
 module.exports = router;
