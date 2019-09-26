@@ -1,0 +1,54 @@
+[
+    {
+        "model": "center",
+        "data": {
+            "center_id": 1,
+            "name": "Global Hospitals",
+            "address": "Anna Nagar, Chennai",
+            "phone_number": "9898989898",
+            "email": "globalhospitals@gmail.com",
+            "lat": 17.0008,
+            "lon": 81.7943,
+            "type": "Hospital"
+        }
+    },
+    {
+        "model": "center",
+        "data": {
+            "center_id": 2,
+            "name": "WeCare Waste Management Center",
+            "address": "Velachery, Chennai",
+            "phone_number": "9696969697",
+            "email": "wecarewmc@gmail.com",
+            "lat": 12.9801,
+            "lon": 80.2184,
+            "type": "WMC"
+        }
+    },
+    {
+        "model": "center",
+        "data": {
+            "center_id": 3,
+            "name": "Apollo Hospitals",
+            "address": "Thousand Lights, Chennai",
+            "phone_number": "9797979797",
+            "email": "apollohospitals@gmail.com",
+            "lat": 12.9787,
+            "lon": 80.2250,
+            "type": "Hospital"
+        }
+    },
+    {
+        "model": "center",
+        "data": {
+            "center_id": 4,
+            "name": "TakeCare Waste Management Center",
+            "address": "Guindy, Chennai",
+            "phone_number": "9592999691",
+            "email": "takecarewmc@gmail.com",
+            "lat": 13.0067,
+            "lon": 80.2206,
+            "type": "WMC"
+        }
+    }
+]

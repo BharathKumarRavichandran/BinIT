@@ -1,0 +1,72 @@
+[
+    {
+        "model": "log",
+        "data": {
+            "log_id": 1,
+            "bin_id": 1,
+            "center_id": 1,
+            "weight": 2,
+            "accessed_by": 1
+        }
+    },
+    {
+        "model": "log",
+        "data": {
+            "log_id": 2,
+            "bin_id": 1,
+            "center_id": 1,
+            "weight": 5,
+            "accessed_by": 1
+        }
+    },
+    {
+        "model": "log",
+        "data": {
+            "log_id": 3,
+            "bin_id": 1,
+            "center_id": 1,
+            "weight": 10,
+            "accessed_by": 1
+        }
+    },
+    {
+        "model": "log",
+        "data": {
+            "log_id": 4,
+            "bin_id": 1,
+            "center_id": 1,
+            "weight": 13,
+            "accessed_by": 1
+        }
+    },
+    {
+        "model": "log",
+        "data": {
+            "log_id": 5,
+            "bin_id": 1,
+            "center_id": 1,
+            "weight": 15,
+            "accessed_by": 1
+        }
+    },
+    {
+        "model": "log",
+        "data": {
+            "log_id": 6,
+            "bin_id": 2,
+            "center_id": 1,
+            "weight": 1,
+            "accessed_by": 3
+        }
+    },
+    {
+        "model": "log",
+        "data": {
+            "log_id": 7,
+            "bin_id": 2,
+            "center_id": 1,
+            "weight": 2,
+            "accessed_by": 3
+        }
+    }
+]

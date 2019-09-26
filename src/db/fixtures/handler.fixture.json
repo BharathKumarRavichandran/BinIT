@@ -1,0 +1,54 @@
+[
+    {
+        "model": "handler",
+        "data": {
+            "handler_id": 1,
+            "name": "Jon Snow",
+            "department": "Admissions",
+            "phone_number": "9898676789",
+            "email": "jonsnow@gmail.com",
+            "designation": "Medical Staff",
+            "center_id": 1,
+            "finger_hash": "3fdbdb34r534g"
+        }
+    },
+    {
+        "model": "handler",
+        "data": {
+            "handler_id": 2,
+            "name": "James Houstan",
+            "department": "NA",
+            "phone_number": "9895676739",
+            "email": "james@gmail.com",
+            "designation": "Baggage maintainer",
+            "center_id": 2,
+            "finger_hash": "9rwer33ddew32"
+        }
+    },
+    {
+        "model": "handler",
+        "data": {
+            "handler_id": 3,
+            "name": "Bob Herm",
+            "department": "Cardiology",
+            "phone_number": "7890567890",
+            "email": "bobherm@gmail.com",
+            "designation": "Medical Attender",
+            "center_id": 3,
+            "finger_hash": "45gbfb43563"
+        }
+    },
+    {
+        "model": "handler",
+        "data": {
+            "handler_id": 4,
+            "name": "John Doe",
+            "department": "NA",
+            "phone_number": "8790234567",
+            "email": "johndoe@gmail.com",
+            "designation": "Driver",
+            "center_id": 4,
+            "finger_hash": "243v23d21sdj"
+        }
+    }
+]

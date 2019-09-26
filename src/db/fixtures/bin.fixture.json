@@ -1,0 +1,26 @@
+[
+    {
+        "model": "bin",
+        "data": {
+            "bin_id": 1,
+            "department": "Admissions",
+            "handler_id": 1,
+            "type": "Non risk waste",
+            "weight": 15,
+            "capacity": 20,
+            "center_id": 1
+        }
+    },
+    {
+        "model": "bin",
+        "data": {
+            "bin_id": 2,
+            "department": "Cardiology",
+            "handler_id": 3,
+            "type": "Sharps",
+            "weight": 2,
+            "capacity": 5,
+            "center_id": 1
+        }
+    }
+]

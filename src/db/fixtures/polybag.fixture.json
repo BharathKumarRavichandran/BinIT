@@ -1,0 +1,41 @@
+[
+    {
+        "model": "polybag",
+        "data": {
+            "polybag_id": 1,
+            "barcode": "2323f3232efw23",
+            "from": 1,
+            "to": 2,
+            "handler_id": 1,
+            "status": "Not delivered",
+            "lat": 17,
+            "lon": 81
+        }
+    },
+    {
+        "model": "polybag",
+        "data": {
+            "polybag_id": 2,
+            "barcode": "scs3233efw",
+            "from": 1,
+            "to": 2,
+            "handler_id": 1,
+            "status": "Delivered",
+            "lat": 12.9801,
+            "lon": 80.21
+        }
+    },
+    {
+        "model": "polybag",
+        "data": {
+            "polybag_id": 3,
+            "barcode": "r23v4324fc",
+            "from": 1,
+            "to": 2,
+            "handler_id": 2,
+            "status": "Not delivered",
+            "lat": 14.9801,
+            "lon": 81.8
+        }
+    }
+]

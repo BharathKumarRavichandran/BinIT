@@ -1,0 +1,46 @@
+[
+    {
+        "model": "user",
+        "data": {
+            "user_id": 1,
+            "email": "tonystark@gmail.com",
+            "password": "",
+            "name": "Tony Stark",
+            "phone_number": "9999988888",
+            "center_id": 1
+        }
+    },
+    {
+        "model": "user",
+        "data": {
+            "user_id": 2,
+            "email": "spidey@gmail.com",
+            "password": "",
+            "name": "Toby Maguire",
+            "phone_number": "9999988887",
+            "center_id": 2
+        }
+    },
+    {
+        "model": "user",
+        "data": {
+            "user_id": 3,
+            "email": "thor@gmail.com",
+            "password": "",
+            "name": "Thor",
+            "phone_number": "9999988886",
+            "center_id": 3
+        }
+    },
+    {
+        "model": "user",
+        "data": {
+            "user_id": 4,
+            "email": "hulk@gmail.com",
+            "password": "",
+            "name": "Hulk",
+            "phone_number": "9999988885",
+            "center_id": 4
+        }
+    }
+]
