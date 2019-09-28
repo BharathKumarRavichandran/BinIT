@@ -11,21 +11,21 @@ const getPolybagsList = async () => {
 	return get(`${serverURL}/polybag/list/all`);
 };
 
-const addNewPolybag = async () => {
-	return post(`${serverURL}/add`);
+const addNewPolybag = async (to, handler_id, type, weight) => {
+	return post(`${serverURL}/polybag/add`, {
+        to,
+        handler_id,
+        type,
+        weight
+    });
 };
 
 const getPolybagDetails = async () => {
 	return post(`${serverURL}/details/get`);
 };
 
-const updatePolybagDetails = async () => {
-	return post(`${serverURL}/details/update`);
-};
-
 export {
     getPolybagsList,
     addNewPolybag,
     getPolybagDetails,
-    updatePolybagDetails
 };

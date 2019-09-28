@@ -15,6 +15,7 @@ import BinDetails from "../../pages/Hospital/BinDetails";
 import Handlers from "../../pages/Hospital/Handlers";
 import Transits from "../../pages/Transits";
 import Logs from "../../pages/Hospital/Logs";
+import Polybags from "../../pages/Hospital/Polybags";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
@@ -42,6 +43,7 @@ function Layout(props) {
               <Route path="/hospital/handlers" component={Handlers} />
               <Route path="/hospital/transits" component={Transits} />
               <Route path="/hospital/logs" component={Logs} />
+              <Route path="/hospital/polybags" component={Polybags} />
             </Switch>
           </div>
         </>

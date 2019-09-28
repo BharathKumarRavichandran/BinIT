@@ -1,5 +1,8 @@
 import React from "react";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import { HashRouter, BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // components
 import Layout from "./Layout";
@@ -11,24 +14,33 @@ import Login from "../pages/Auth/Login";
 // context
 import { useUserState } from "../context/UserContext";
 
+// Add configuration settings for react-toastify
+toast.configure({
+	autoClose: 8000,
+	draggable: false,
+	position: toast.POSITION.BOTTOM_RIGHT
+});
+
 export default function App() {
   // global
   var { isAuthenticated } = useUserState();
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Switch>
+        {/*
         <Route exact path="/" render={() => <Redirect to="/hospital/bins" />} />
         <Route
           exact
           path="/app"
           render={() => <Redirect to="/hospital/bins" />}
         />
+        */}
         <PrivateRoute path="/hospital" component={Layout} />
         <PublicRoute path="/login" component={Login} />
-        <Route component={Error} />
+        {/*<Route component={Error} />*/}
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   );
 
   // #######################################################################

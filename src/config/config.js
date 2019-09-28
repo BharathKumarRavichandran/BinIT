@@ -20,6 +20,6 @@ module.exports = {
 	//	APP_PORT: process.env.APP_PORT || 3000,
 	},
 	url: {
-	//	API_BASE_URL: process.env.API_BASE_URL || '0.0.0.0:8000'
+		API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:8000'
 	}
 };

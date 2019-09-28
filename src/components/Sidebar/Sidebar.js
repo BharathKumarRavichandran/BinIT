@@ -30,7 +30,8 @@ const structure = [
   { id: 0, label: "Smart Bins", link: "/hospital/bins", icon: <BinIcon /> },
   { id: 1, label: "Bin Handlers", link: "/hospital/handlers", icon: <ContactsIcon /> },
   { id: 2, label: "Waste Transits", link: "/hospital/transits", icon: <TransitIcon /> },
-  { id: 3, label: "Access Logs", link: "/hospital/logs", icon: <LogsIcon /> }
+  { id: 3, label: "Access Logs", link: "/hospital/logs", icon: <LogsIcon /> },
+  { id: 4, label: "Add Polybag", link: "/hospital/polybags", icon: <LogsIcon /> }
 ];
 
 function Sidebar({ location }) {
