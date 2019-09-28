@@ -117,7 +117,7 @@ const Polybags = (props) => {
 	useEffect(() => {
 		const endpoint = url.API_BASE_URL;
 		const socket = socketIOClient(endpoint);
-		socket.on("weight emitted", async (data) => {
+		socket.on("polybagWeightEmitted", async (data) => {
 			setWeight(data.weight);
 		});
 		

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from 'react-router-dom';
 
+import socketIOClient from "socket.io-client";
 import { toast } from 'react-toastify';
 
 import { CircularProgress, Box, Grid, responsiveFontSizes } from "@material-ui/core";
@@ -20,11 +21,7 @@ import Dot from "../../../components/Sidebar/components/Dot";
 
 // Importing API utils
 import { getBinDetails } from '../../../utils/api/bin.helper';
-
-const PieChartData = [
-	{ name: "Filled", value: 17, color: "primary" },
-	{ name: "Empty", value: 20, color: "secondary" }
-];
+import { url } from '../../../config/config';
 
 const datatableData = [
 	["Joe James", "Accident and emergency (A&E)", "16 KG", "2019-09-21 00:00:00"],
@@ -49,11 +46,17 @@ const BinDetails = (props) => {
 	// Initialize bin parameters
 	const [binId, setBinId] = useState(props.match.params.binId);
 	const [binLocation, setBinLocation] = useState('Hospital');
-	const [binType, setBinType] = useState('	Pathological waste');
-	const [binCapacity, setBinCapacity] = useState('20 KG');
-	const [binWeight, setBinWeight] = useState('17 KG');
+	const [binType, setBinType] = useState('Pathological waste');
+	const [binCapacity, setBinCapacity] = useState(5);
+	const [binWeight, setBinWeight] = useState(1);
+	const [binEmpty, setBinEmpty] = useState(4);
 	const [lastAccessedAt, setLastAccessedAt] = useState('2019-09-21 00:00:00');
 	const [lastAccessedBy, setLastAccessedBy] = useState('Joe James');
+
+	const [PieChartData, setPieChartData] = useState([
+		{ name: "Filled", value: 1, color: "primary" },
+		{ name: "Empty", value: 4, color: "secondary" }
+	]);
 
 	// Initialize contact details
 	const [maintainerName, setMaintainerName] = useState('Joe James');
@@ -64,33 +67,36 @@ const BinDetails = (props) => {
 	const fetchBinDetails = async (binId) => {
 		try {
 			const serverResponse = await getBinDetails(binId);
+			console.log(serverResponse);
 			if (serverResponse.data.status_code === 200 && serverResponse.data.data) {
 				let reqData = serverResponse.data.data;
 
 				// Set Bin params
 				setBinId(reqData.bin.bin_id);
-				setBinLocation(reqData.bin.location);
+				setBinLocation('Hospital');
 				setBinType(reqData.bin.type);
 				setBinCapacity(reqData.bin.capacity);
 				setBinWeight(reqData.bin.weight);
-				setLastAccessedAt(reqData.bin.lastAccessedAt);
-				setLastAccessedBy(reqData.bin.lastAccessedBy);
+				setLastAccessedAt(reqData.bin.updatedAt);
+				setLastAccessedBy('Joe James');
 
 				// Set Handler details
+				/*
 				setMaintainerName(reqData.handler.name);
 				setMaintainerDept(reqData.handler.department);
 				setMaintainerPhNo(reqData.handler.phone_number);
 				setMaintainerEmail(reqData.handler.email);
+				*/
 			}
 			else {
 				if (serverResponse.data.status_code === 400) {
-					props.history.push('/bin');
+					props.history.push('/hospitals/bins');
 				}
 				else if (serverResponse.data.message)
 					toast.error(serverResponse.data.message);
 				else
 					toast.error(serverResponse.statusText);
-				props.history.push('/bin');
+				props.history.push('/hospitals/bins');
 			}
 		} catch (error) {
 			toast.error(error.toString());
@@ -99,11 +105,30 @@ const BinDetails = (props) => {
 	};
 
 	useEffect(() => {
+		const endpoint = url.API_BASE_URL;
+		const socket = socketIOClient(endpoint);
+		socket.on("binWeightEmitted", async (data) => {
+			let updatedWeight = parseFloat(data.weight);
+			setBinWeight(updatedWeight);
+			setBinEmpty(binCapacity-updatedWeight);
+			setPieChartData([
+				{
+					name: PieChartData[0].name,
+					value: updatedWeight,
+					color: "primary"
+				},
+				{
+					name: PieChartData[1].name,
+					value: binCapacity-updatedWeight,
+					color: "secondary"
+				}
+			]);
+		});
 		async function fetchAPI(binId) {
 			try {
 				// Check status 200 otherwise redirect to Bins page
 				setIsLoading(true);
-				//await fetchBinDetails(binId);
+				await fetchBinDetails(binId);
 				setIsLoading(false);
 			} catch (error) {
 				toast.error(error.toString());
@@ -209,7 +234,7 @@ const BinDetails = (props) => {
 									</Grid>
 									<Grid item xs={6} md={6} lg={6}>
 										<Typography className={classes.fieldValue}>
-											{binCapacity}
+											{`${binCapacity} KG`}
 										</Typography>
 									</Grid>
 								</Grid>
@@ -221,7 +246,7 @@ const BinDetails = (props) => {
 									</Grid>
 									<Grid item xs={6} md={6} lg={6}>
 										<Typography>
-											{binWeight}
+											{`${binWeight} KG`}
 										</Typography>
 									</Grid>
 								</Grid>
