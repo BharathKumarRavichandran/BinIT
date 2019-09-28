@@ -4,12 +4,15 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const express = require('express');
 const expressValidator = require('express-validator');
+const HttpStatus = require('http-status-codes');
 const logger = require('./config/winston');
 const morgan = require('morgan');
 const session = require('express-session');
 const Sequelize = require('sequelize');
 const sgMail = require('@sendgrid/mail');
 const signale = require('signale');
+const http = require("http");
+const socketIo = require("socket.io");
 
 //Importing routes
 const routes = require('./routes/index.router');
@@ -31,6 +34,10 @@ const corsOptions = {
 // Initialising express
 const app = express();
 const router = express.Router();
+
+// Initialising sockets
+const server = http.createServer(app);
+const io = socketIo(server);
 
 
 // Configuring public path
@@ -106,8 +113,8 @@ app.get('/', (req, res) => {
 	return res.send('What are you doing here? :p');
 });
 
+/*
 var Web3 = require('web3');
-
 app.get('/test', async (req, res) => {
 	try{ 
 		let web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
@@ -127,7 +134,7 @@ app.get('/test', async (req, res) => {
 		console.log(await polybagContract.methods.saveData(1,web3.utils.asciiToHex("20")).call());
 		console.log(await polybagContract.methods.getData(1).call());
 		
-		/*
+		
 		// suppose you want to call a function named myFunction of myContract
 		var setWeight = await polybagContract.setData.getData(function (1,20));
 		// finally pass this data parameter to send Transaction
@@ -137,11 +144,65 @@ app.get('/test', async (req, res) => {
 		// finally pass this data parameter to send Transaction
 		var test = await web3.eth.sendTransaction( {to: "0x30c1388c5263e598ecBA609599527630897e71EF", data: setWeight });
 		console.log(test);
-		*/
+		
 	} catch(error){
 		console.log(error);
 	}
 
+});
+*/
+
+//Setting up a socket with the namespace "connection" for new sockets
+io.on("connection", socket => {
+    console.log("New client connected");
+
+    //Here we listen on a new namespace called "incoming data"
+    socket.on("incoming data", (data) => {
+		console.log('incoming data', data);
+        //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
+       socket.broadcast.emit("outgoing data", {num: data});
+    });
+
+    //A special namespace "disconnect" for when a client disconnects
+    socket.on("disconnect", () => console.log("Client disconnected"));
+});
+
+// Emit data to UI when this API route is hit
+app.post('/addWeight', async (req,res) => {
+	try{
+		if (!req.body.weight) {
+			logger.warn('Invalid parameters');
+			let status_code = 400;
+			return res.status(status_code).json({
+				status_code: status_code,
+				message: HttpStatus.getStatusText(status_code),
+				data: {}
+			});
+		}
+
+		let data = {
+			weight: req.body.weight
+		}
+		io.sockets.emit("weight emitted", data);
+		console.log('Emitted weight');
+		let message = 'Successfully emitted weight.';
+        logger.info(message);
+        let status_code = 200;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: message,
+            data: {}
+        });
+
+	} catch(error) {
+		logger.error(error.toString());
+        let status_code = 500;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: HttpStatus.getStatusText(status_code),
+            data: {}
+        });
+	}
 });
 
 // Route error handler
@@ -155,6 +216,9 @@ app.all('*', (req, res) => {
 	return res.sendStatus(404);
 });
 
+server.listen(APP_PORT, () => signale.log(`App server listening on port: ${APP_PORT}`));
+
+/*
 exports.start = () => {
 	app.listen(APP_PORT, () => {
 		signale.success(`App server listening on port: ${APP_PORT}`);
@@ -166,3 +230,4 @@ exports.stop = () => {
 		signale.success(`App server shut down on port: ${APP_PORT}`);
 	});
 }
+*/
