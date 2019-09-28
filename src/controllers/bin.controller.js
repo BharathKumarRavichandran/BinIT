@@ -36,7 +36,8 @@ exports.getList = async (req, res) => {
 
 exports.getDetails = async (req, res) => {
     try{
-        if(!req.params.binId){
+        console.log(req.query);
+        if(!req.query.binId){
             logger.warn('Invalid parameters');
             let status_code = 400;
             return res.status(status_code).json({
@@ -46,7 +47,7 @@ exports.getDetails = async (req, res) => {
             });
         }
 
-        const bin_id = req.params.binId;
+        const bin_id = req.query.binId;
         const bin = await Bin.findOne({ where: { bin_id: bin_id } });
 
         let message = 'Successfully retrieved bin details.';
@@ -55,7 +56,9 @@ exports.getDetails = async (req, res) => {
         return res.status(status_code).json({
             status_code: status_code,
             message: message,
-            data: bin
+            data: {
+                bin: bin
+            }
         });
     } catch(error){
         logger.error(error.toString());

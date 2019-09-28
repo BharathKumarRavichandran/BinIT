@@ -20,6 +20,10 @@ const routes = require('./routes/index.router');
 // Importing configuration file
 const config = require('./config/config');
 
+// Importing models
+const models = require('./db/models/index');
+const Bin = models.bin;
+
 // env/config variables
 const APP_PORT = config.ports.APP_PORT || 8000;
 const SESSION_SECRET = config.session.secretString;
@@ -107,10 +111,121 @@ app.use(session({
 // Set Sendgrid API key
 sgMail.setApiKey(config.key.SENDGRID_API_KEY);
 
+//Setting up a socket with the namespace "connection" for new sockets
+io.on("connection", socket => {
+    console.log("New client connected");
+
+    //Here we listen on a new namespace called "incoming data"
+    socket.on("incoming data", (data) => {
+		console.log('incoming data', data);
+        //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
+       socket.broadcast.emit("outgoing data", {num: data});
+    });
+
+    //A special namespace "disconnect" for when a client disconnects
+    socket.on("disconnect", () => console.log("Client disconnected"));
+});
 app.use(routes);
 
 app.get('/', (req, res) => {
 	return res.send('What are you doing here? :p');
+});
+
+
+
+// Emit data to UI when this API route is hit
+app.post('/updateBinWeight', async (req,res) => {
+	try{
+		const user_id = 1;
+		if (!req.body.weight) {
+			logger.warn('Invalid parameters');
+			let status_code = 400;
+			return res.status(status_code).json({
+				status_code: status_code,
+				message: HttpStatus.getStatusText(status_code),
+				data: {}
+			});
+		}
+
+		let data = {
+			weight: req.body.weight
+		}
+		io.sockets.emit("binWeightEmitted", data);
+		
+		console.log('Emitted bin weight');
+
+		const bin_id = 1;
+        const weight = req.body.weight;
+        let bin = await Bin.findOne({ where: { bin_id: bin_id } });
+        if(!bin){
+            logger.warn(`Bin doesn't exists.`);
+            let status_code = 400;
+            return res.status(status_code).json({
+                status_code: status_code,
+                message: HttpStatus.getStatusText(status_code),
+                data: {}
+            });
+        }
+        bin.weight = weight;
+        bin = await bin.save();
+		
+		let message = 'Successfully emitted and saved bin weight.';
+		logger.info(message);
+        let status_code = 200;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: message,
+            data: {}
+        });
+
+	} catch(error) {
+		logger.error(error.toString());
+        let status_code = 500;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: HttpStatus.getStatusText(status_code),
+            data: {}
+        });
+	}
+});
+
+
+// Emit data to UI when this API route is hit
+app.post('addPolybagWeight', async (req,res) => {
+	try{
+		if (!req.body.weight) {
+			logger.warn('Invalid parameters');
+			let status_code = 400;
+			return res.status(status_code).json({
+				status_code: status_code,
+				message: HttpStatus.getStatusText(status_code),
+				data: {}
+			});
+		}
+
+		let data = {
+			weight: req.body.weight
+		}
+		io.sockets.emit("polybagWeightEmitted", data);
+		console.log('Emitted polybag weight');
+		let message = 'Successfully emitted polybag weight.';
+        logger.info(message);
+        let status_code = 200;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: message,
+            data: {}
+        });
+
+	} catch(error) {
+		logger.error(error.toString());
+        let status_code = 500;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: HttpStatus.getStatusText(status_code),
+            data: {}
+        });
+	}
 });
 
 /*
@@ -152,58 +267,6 @@ app.get('/test', async (req, res) => {
 });
 */
 
-//Setting up a socket with the namespace "connection" for new sockets
-io.on("connection", socket => {
-    console.log("New client connected");
-
-    //Here we listen on a new namespace called "incoming data"
-    socket.on("incoming data", (data) => {
-		console.log('incoming data', data);
-        //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
-       socket.broadcast.emit("outgoing data", {num: data});
-    });
-
-    //A special namespace "disconnect" for when a client disconnects
-    socket.on("disconnect", () => console.log("Client disconnected"));
-});
-
-// Emit data to UI when this API route is hit
-app.post('/addWeight', async (req,res) => {
-	try{
-		if (!req.body.weight) {
-			logger.warn('Invalid parameters');
-			let status_code = 400;
-			return res.status(status_code).json({
-				status_code: status_code,
-				message: HttpStatus.getStatusText(status_code),
-				data: {}
-			});
-		}
-
-		let data = {
-			weight: req.body.weight
-		}
-		io.sockets.emit("weight emitted", data);
-		console.log('Emitted weight');
-		let message = 'Successfully emitted weight.';
-        logger.info(message);
-        let status_code = 200;
-        return res.status(status_code).json({
-            status_code: status_code,
-            message: message,
-            data: {}
-        });
-
-	} catch(error) {
-		logger.error(error.toString());
-        let status_code = 500;
-        return res.status(status_code).json({
-            status_code: status_code,
-            message: HttpStatus.getStatusText(status_code),
-            data: {}
-        });
-	}
-});
 
 // Route error handler
 app.use( (err, req, res, next) => {

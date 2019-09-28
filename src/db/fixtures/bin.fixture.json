@@ -3,7 +3,7 @@
         "model": "bin",
         "data": {
             "bin_id": 1,
-            "department": "Admissions",
+            "department": "Accident and emergency (A&E)",
             "handler_id": 1,
             "type": "Non risk waste",
             "weight": 15,
@@ -15,7 +15,7 @@
         "model": "bin",
         "data": {
             "bin_id": 2,
-            "department": "Cardiology",
+            "department": "Admissions",
             "handler_id": 3,
             "type": "Sharps",
             "weight": 2,
