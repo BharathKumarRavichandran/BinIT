@@ -27,14 +27,14 @@ const PieChartData = [
 ];
 
 const datatableData = [
-	["Joe James", "Example", "16 KG", "2019-09-21 00:00:00"],
-	["John Walsh", "Example", "13 KG", "2019-09-21 00:00:00"],
-	["Bob Herm", "Example ", "12 KG", "2019-09-21 00:00:00"],
-	["James Houston", "Example ", "10 KG", "2019-09-21 00:00:00"],
-	["Prabhakar Linwood", "Example ", "8 KG", "2019-09-21 00:00:00"],
-	["Kaui Ignace", "Example ", "7KG", "2019-09-21 00:00:00"],
-	["Esperanza Susanne", "Example ", "4 KG", "2019-09-21 00:00:00"],
-	["Christian Birgitte", "Example ", "1 KG", "2019-09-21 00:00:00"],
+	["Joe James", "Accident and emergency (A&E)", "16 KG", "2019-09-21 00:00:00"],
+	["John Walsh", "Admissions", "13 KG", "2019-09-21 00:00:00"],
+	["Bob Herm", "Anesthetics", "12 KG", "2019-09-21 00:00:00"],
+	["James Houston", "Cardiology", "10 KG", "2019-09-21 00:00:00"],
+	["Prabhakar Linwood", "Coronary Care Unit (CCU)", "8 KG", "2019-09-21 00:00:00"],
+	["Kaui Ignace", "Diagnostic Imaging", "7KG", "2019-09-21 00:00:00"],
+	["Esperanza Susanne", "Discharge Lounge", "4 KG", "2019-09-21 00:00:00"],
+	["Christian Birgitte", "Finance Department", "1 KG", "2019-09-21 00:00:00"],
 ];
 
 const BinDetails = (props) => {

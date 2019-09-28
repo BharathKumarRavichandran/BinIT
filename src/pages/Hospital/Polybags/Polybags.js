@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from 'react-router-dom';
 
+import socketIOClient from "socket.io-client";	
 import { toast } from 'react-toastify';
 
 import { CircularProgress, Box, Grid, Button, Tabs, Tab, TextField, Paper } from "@material-ui/core";
@@ -27,6 +28,7 @@ import { Typography } from "../../../components/Wrappers/Wrappers";
 
 // Importing API utils
 import { addNewPolybag } from '../../../utils/api/polybag.helper';
+import { url } from '../../../config/config';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -113,6 +115,12 @@ const Polybags = (props) => {
 	};
 
 	useEffect(() => {
+		const endpoint = url.API_BASE_URL;
+		const socket = socketIOClient(endpoint);
+		socket.on("weight emitted", async (data) => {
+			setWeight(data.weight);
+		});
+		
 		async function fetchAPI() {
 			try {
 				// Check status 200 otherwise redirect to Bins page
