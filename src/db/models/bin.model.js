@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		department: {
 			field: 'department',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false
 		},
 		handler_id: {
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		type: {
 			field: 'type',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false
 		},
 		weight: { // default unit 'KG'

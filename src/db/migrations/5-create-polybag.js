@@ -10,7 +10,17 @@ module.exports = {
             },
             barcode: {
                 field: 'barcode',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
+                allowNull: false
+            },
+            barcode_image_path: {
+                field: 'barcode_image_path',
+                type: Sequelize.STRING(100),
+                allowNull: false
+            },
+            type: {
+                field: 'type',
+                type: Sequelize.STRING(100),
                 allowNull: false
             },
             from: {

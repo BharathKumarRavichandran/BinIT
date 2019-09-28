@@ -38,6 +38,9 @@ module.exports = {
 		DB_PASSWORD: process.env.DB_PASSWORD,
 		DB_DIALECT: process.env.DB_DIALECT
 	},
+	blockchain: {
+		CONTRACT_ADDRESS: process.env.CONTRACT_ADDRESS
+	},
 	ports: {
 		APP_PORT: process.env.APP_PORT,
 	},

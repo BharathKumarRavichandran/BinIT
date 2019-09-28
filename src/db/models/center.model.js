@@ -8,22 +8,22 @@ module.exports = (sequelize, DataTypes) => {
 		},
         name: {
             field: 'name',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false
         },
         address: {
             field: 'address',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false
         },
         phone_number: {
             field: 'phone_number',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
             allowNull: false
         },
 		email: {
             field: 'email',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false,
 			unique: true,
 			validate: {

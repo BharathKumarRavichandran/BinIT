@@ -10,7 +10,7 @@ module.exports = {
             },
             name: {
                 field: 'name',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
                 allowNull: false,
                 validate: {
                     isEmpty(val, next) {
@@ -21,7 +21,7 @@ module.exports = {
             },
             email: {
                 field: 'email',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
                 allowNull: false,
                 unique: true,
                 validate: {
@@ -30,12 +30,12 @@ module.exports = {
             },
             password: {
                 field: 'password',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
                 allowNull: false,
             },
             phone_number: {
                 field: 'phone_number',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
                 allowNull: false,
                 unique: true,
             },

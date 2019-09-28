@@ -23,7 +23,7 @@ const SESSION_SECRET = config.session.secretString;
 
 // Adding options for CORS middleware
 const corsOptions = {
-	origin: config.url.CLIENT_BASE_URL,
+	origin: 'http://localhost:3000',
 	methods: ['GET', 'PUT', 'POST', 'DELETE'],
 	credentials: true
 };
@@ -104,6 +104,44 @@ app.use(routes);
 
 app.get('/', (req, res) => {
 	return res.send('What are you doing here? :p');
+});
+
+var Web3 = require('web3');
+
+app.get('/test', async (req, res) => {
+	try{ 
+		let web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+		//web3.eth.DefaultAccount = web3.eth.accounts[0];
+		//console.log("default account: " + web3.eth.DefaultAccount);
+
+		//contract data regarding all variables / functions
+
+		var fs = require('fs');
+		var jsonFile = "/home/teslash21/CS/Github/BinIT-API/src/blockchain/build/contracts/storePolybagWeight.json";
+		var parsed= JSON.parse(fs.readFileSync(jsonFile));
+		var polybagContract = parsed.abi;
+//		var polybagContract = new web3.eth.Contract([{"constant":false,"inputs":[{"name":"_s","type":"string"}],"name":"setter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getTest","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}], "0x30c1388c5263e598ecBA609599527630897e71EF");
+
+		console.log(polybagContract);
+		// Contract address to be able to communicate with it
+		console.log(await polybagContract.methods.saveData(1,web3.utils.asciiToHex("20")).call());
+		console.log(await polybagContract.methods.getData(1).call());
+		
+		/*
+		// suppose you want to call a function named myFunction of myContract
+		var setWeight = await polybagContract.setData.getData(function (1,20));
+		// finally pass this data parameter to send Transaction
+		await web3.eth.sendTransaction( {to: "0x30c1388c5263e598ecBA609599527630897e71EF", data: setWeight });
+
+		var getWeight = await polybagContract.getData.getData(function (1));
+		// finally pass this data parameter to send Transaction
+		var test = await web3.eth.sendTransaction( {to: "0x30c1388c5263e598ecBA609599527630897e71EF", data: setWeight });
+		console.log(test);
+		*/
+	} catch(error){
+		console.log(error);
+	}
+
 });
 
 // Route error handler

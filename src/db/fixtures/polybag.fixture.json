@@ -4,6 +4,8 @@
         "data": {
             "polybag_id": 1,
             "barcode": "2323f3232efw23",
+            "barcode_image_path": "images/barcode/1_red_20_2019-09-28-10:39:09.png",
+            "type": "Red",
             "from": 1,
             "to": 2,
             "handler_id": 1,
@@ -17,6 +19,8 @@
         "data": {
             "polybag_id": 2,
             "barcode": "scs3233efw",
+            "barcode_image_path": "images/barcode/1_red_20_2019-09-28-10:39:09.png",
+            "type": "Yellow",
             "from": 1,
             "to": 2,
             "handler_id": 1,
@@ -30,6 +34,8 @@
         "data": {
             "polybag_id": 3,
             "barcode": "r23v4324fc",
+            "barcode_image_path": "images/barcode/1_red_20_2019-09-28-10:39:09.png",
+            "type": "Green",
             "from": 1,
             "to": 2,
             "handler_id": 2,

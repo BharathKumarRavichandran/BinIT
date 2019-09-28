@@ -10,22 +10,22 @@ module.exports = (sequelize, DataTypes) => {
 		},
         name: {
             field: 'name',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false
         },
         department: {
             field: 'department',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false
         },
         phone_number: {
             field: 'phone_number',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
             allowNull: false
         },
 		email: {
             field: 'email',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false,
 			unique: true,
 			validate: {
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         designation: {
             field: 'designation',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false
         },
 		center_id: {
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         finger_hash: {
             field: 'finger_hash',
-            type: DataTypes.STRING(32),
+            type: DataTypes.STRING(100),
             allowNull: false
         }
 	}, {

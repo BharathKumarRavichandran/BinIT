@@ -11,7 +11,17 @@ module.exports = (sequelize, DataTypes) => {
 		},
         barcode: {
             field: 'barcode',
-            type: DataTypes.STRING(32),
+            type: DataTypes.STRING(100),
+            allowNull: false
+        },
+        barcode_image_path: {
+            field: 'barcode_image_path',
+            type: DataTypes.STRING(100),
+            allowNull: false
+        },
+        type: {
+            field: 'type',
+            type: DataTypes.STRING(100),
             allowNull: false
         },
         from: {

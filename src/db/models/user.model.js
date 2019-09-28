@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		email: {
 			field: 'email',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false,
 			unique: true,
 			validate: {
@@ -19,12 +19,12 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		password: {
 			field: 'password',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false,
 		},
 		name: {
 			field: 'name',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false,
 			validate: {
 				isEmpty(val, next) {
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		phone_number: {
 			field: 'phone_number',
-			type: DataTypes.STRING(32),
+			type: DataTypes.STRING(100),
 			allowNull: false,
 			unique: true,
 		},

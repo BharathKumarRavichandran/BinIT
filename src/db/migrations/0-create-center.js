@@ -10,22 +10,22 @@ module.exports = {
             },
             name: {
                 field: 'name',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
                 allowNull: false
             },
             address: {
                 field: 'address',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
                 allowNull: false
             },
             phone_number: {
                 field: 'phone_number',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
                 allowNull: false
             },
             email: {
                 field: 'email',
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(100),
                 allowNull: false,
                 unique: true,
                 validate: {

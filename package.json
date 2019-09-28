@@ -41,6 +41,7 @@
 		"sequelize-fixtures": "^1.0.2",
 		"signale": "^1.4.0",
 		"validator": "^11.0.0",
+		"web3": "^1.2.1",
 		"winston": "^3.2.1"
 	},
 	"devDependencies": {
