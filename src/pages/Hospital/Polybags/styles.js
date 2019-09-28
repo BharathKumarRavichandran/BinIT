@@ -12,6 +12,11 @@ export default makeStyles(theme => ({
     flexGrow: 1,
     paddingBottom: theme.spacing(1),
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    maxWidth: 400,
+  },
   progressSection: {
     marginBottom: theme.spacing(1),
   },

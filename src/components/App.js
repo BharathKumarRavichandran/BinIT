@@ -28,17 +28,17 @@ export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        {/*
+      
         <Route exact path="/" render={() => <Redirect to="/hospital/bins" />} />
         <Route
           exact
           path="/app"
           render={() => <Redirect to="/hospital/bins" />}
         />
-        */}
+        
         <PrivateRoute path="/hospital" component={Layout} />
         <PublicRoute path="/login" component={Login} />
-        {/*<Route component={Error} />*/}
+        <Route component={Error} />
       </Switch>
     </BrowserRouter>
   );

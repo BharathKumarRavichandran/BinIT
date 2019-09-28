@@ -11,6 +11,7 @@ import {
   LocalShipping as TransitIcon,
   FileCopy as LogsIcon
 } from "@material-ui/icons";
+import LocalMallIcon from '@material-ui/icons/LocalMall';
 import { useTheme } from "@material-ui/styles";
 
 // styles
@@ -31,7 +32,7 @@ const structure = [
   { id: 1, label: "Bin Handlers", link: "/hospital/handlers", icon: <ContactsIcon /> },
   { id: 2, label: "Waste Transits", link: "/hospital/transits", icon: <TransitIcon /> },
   { id: 3, label: "Access Logs", link: "/hospital/logs", icon: <LogsIcon /> },
-  { id: 4, label: "Add Polybag", link: "/hospital/polybags", icon: <LogsIcon /> }
+  { id: 4, label: "Add Polybag", link: "/hospital/polybags", icon: <LocalMallIcon /> }
 ];
 
 function Sidebar({ location }) {

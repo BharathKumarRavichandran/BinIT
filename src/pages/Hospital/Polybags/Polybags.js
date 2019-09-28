@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 
-import path from 'path';
 import { CircularProgress, Box, Grid, Button, Tabs, Tab, TextField, Paper } from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,6 +10,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 
 import { useTheme } from "@material-ui/styles";
 
@@ -28,7 +31,20 @@ import { addNewPolybag } from '../../../utils/api/polybag.helper';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
-  });
+});
+
+const names = [
+	'Oliver Hansen',
+	'Van Henry',
+	'April Tucker',
+	'Ralph Hubbard',
+	'Omar Alexander',
+	'Carlos Abbott',
+	'Miriam Wagner',
+	'Bradley Wilkerson',
+	'Virginia Andrews',
+	'Kelly Snyder',
+];
 
 const Polybags = (props) => {
 	var classes = useStyles();
@@ -38,19 +54,22 @@ const Polybags = (props) => {
 	
 	// local
 	const [isLoading, setIsLoading] = useState(false);
-	const [centerId, setCenterId] = useState(null);
-	const [handlerId, setHandlerId] = useState(null);
-	const [type, setType] = useState(null);
-	const [weight, setWeight] = useState(null);
-	const [barcodeImagePath, setBarcodeImagePath] = useState('/images/barcode/1_Red_3_2019-09-28-12:44:47.png');
-	const [open, setOpen] = useState(true);
+	const [centerId, setCenterId] = useState('');
+	const [handlerId, setHandlerId] = useState('');
+	const [type, setType] = useState('');
+	const [weight, setWeight] = useState('');
+	const [barcodeImagePath, setBarcodeImagePath] = useState('');
+	const [open, setOpen] = useState(false);
 
-	function handleClickOpen() {
-		setOpen(true);
-	}
+	const [handlerList, setHandlerList] = useState([4]);
+	const [wmcList, setWmcList] = useState([2,4]);
 
 	function handleClose() {
 		setOpen(false);
+		setCenterId('');
+		setHandlerId('');
+		setType('');
+		setWeight('');
 	}
 
 
@@ -69,7 +88,7 @@ const Polybags = (props) => {
 				if (serverResponse.data.status_code == 200) {
 					console.log(serverResponse.data.data);
 					const responseData = serverResponse.data.data;
-					setBarcodeImagePath(responseData.barcode_image_path);
+					setBarcodeImagePath("/"+responseData.barcode_image_path);
 					setOpen(true);
 					toast.success(serverResponse.data.message);
 				}
@@ -79,10 +98,11 @@ const Polybags = (props) => {
 					else
 						toast.error(serverResponse.statusText);
 				}
-				setCenterId(null);
-				setHandlerId(null);
-				setType(null);
-				setWeight(null);
+				setCenterId('');
+				setHandlerId('');
+				setType('');
+				setWeight('');
+				return false;
 			}
 			else {
 				toast.error('Please fill all details.');
@@ -117,6 +137,7 @@ const Polybags = (props) => {
 						<Widget title="Add Polybag" upperTitle className={classes.card} disableWidgetMenu>
 							<Grid container spacing={2}>
 								<Grid item xs={12} sm={9} md={3} lg={9}>
+									{/*
 									<TextField
 										id="centerId"
 										InputProps={{
@@ -132,6 +153,42 @@ const Polybags = (props) => {
 										type="text"
 										fullWidth
 									/>
+									*/}
+									<FormControl fullWidth className={classes.formControl}>
+										<InputLabel htmlFor="centerId">WMC Center ID</InputLabel>
+										<Select
+										value={centerId}
+										onChange={e => setCenterId(e.target.value)}
+										inputProps={{
+											name: 'WMC Center ID',
+											id: 'centerId',
+										}}
+										>
+										{wmcList.map(name => (
+											<MenuItem key={name} value={name} >
+											{name}
+											</MenuItem>
+										))}
+										</Select>
+									</FormControl>
+									<FormControl fullWidth className={classes.formControl}>
+										<InputLabel htmlFor="handlerId">Handler ID</InputLabel>
+										<Select
+										value={handlerId}
+										onChange={e => setHandlerId(e.target.value)}
+										inputProps={{
+											name: 'Handler ID',
+											id: 'handlerId',
+										}}
+										>
+										{handlerList.map(name => (
+											<MenuItem key={name} value={name} >
+											{name}
+											</MenuItem>
+										))}
+										</Select>
+									</FormControl>
+									{/*
 									<TextField
 										id="handlerId"
 										InputProps={{
@@ -147,6 +204,7 @@ const Polybags = (props) => {
 										type="text"
 										fullWidth
 									/>
+									*/}
 									<TextField
 										id="Waste Type"
 										InputProps={{
@@ -182,7 +240,6 @@ const Polybags = (props) => {
 										variant="contained"
 										color="primary"
 										fullWidth
-										className={classes.submit}
 										onClick={handleAddPolybag}
 									>
 										<Typography variant="button">Add Polybag</Typography>

@@ -16,14 +16,14 @@ import PageTitle from "../../../components/PageTitle/PageTitle";
 import { getHospiAccessLogs } from '../../../utils/api/hospi.helper';
 
 const datatableData = [
-	["12123", "Joe James", "Example", "2019-09-21 00:00:00"],
-	["12123", "John Walsh", "Example", "2019-09-21 00:00:00"],
-	["12123", "Bob Herm", "Example ", "2019-09-21 00:00:00"],
-	["12123", "James Houston", "Example ", "2019-09-21 00:00:00"],
-	["12123", "Prabhakar Linwood", "Example ", "2019-09-21 00:00:00"],
-	["12123", "Kaui Ignace", "Example ", "2019-09-21 00:00:00"],
-	["12123", "Esperanza Susanne", "Example ", "2019-09-21 00:00:00"],
-	["12123", "Christian Birgitte", "Example ", "2019-09-21 00:00:00"],
+	["Joe James", "Accident and emergency (A&E)", "16 KG", "2019-09-21 00:00:00"],
+	["John Walsh", "Admissions", "13 KG", "2019-09-21 00:00:00"],
+	["Bob Herm", "Anesthetics", "12 KG", "2019-09-21 00:00:00"],
+	["James Houston", "Cardiology", "10 KG", "2019-09-21 00:00:00"],
+	["Prabhakar Linwood", "Coronary Care Unit (CCU)", "8 KG", "2019-09-21 00:00:00"],
+	["Kaui Ignace", "Diagnostic Imaging", "7KG", "2019-09-21 00:00:00"],
+	["Esperanza Susanne", "Discharge Lounge", "4 KG", "2019-09-21 00:00:00"],
+	["Christian Birgitte", "Finance Department", "1 KG", "2019-09-21 00:00:00"]
 ];
 
 export default function Logs() {

@@ -16,23 +16,17 @@ import PageTitle from "../../../components/PageTitle";
 import { getHandlersList } from '../../../utils/api/handler.helper';
 
 const datatableData = [
-	["Joe James", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["John Walsh", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Bob Herm", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["James Houston", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Prabhakar Linwood", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Kaui Ignace", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Esperanza Susanne", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Christian Birgitte", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Meral Elias", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Deep Pau", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Sebastiana Hani", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Marciano Oihana", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Brigid Ankur", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Anna Siranush", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Avram Sylva", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Serafima Babatunde", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
-	["Gaston Festus", "Example", "+91 90909 90909", "example@example.com", "Medical Staff"],
+	["Joe James", "Accident and emergency (A&E)", "+91 90909 90909", "joe@example.com", "Medical Staff"],
+	["John Walsh", "Admissions", "+91 90909 90909", "john@example.com", "Medical Staff"],
+	["Bob Herm", "Anesthetics", "+91 90909 90909", "bob@example.com", "Medical Staff"],
+	["James Houston", "Cardiology", "+91 90909 90909", "james@example.com", "Medical Staff"],
+	["Prabhakar Linwood", "Coronary Care Unit (CCU)", "+91 90909 90909", "linwood@example.com", "Medical Staff"],
+	["Kaui Ignace", "Diagnostic Imaging", "+91 90909 90909", "kaui@example.com", "Medical Staff"],
+	["Esperanza Susanne", "Discharge Lounge", "+91 90909 90909", "susanne@example.com", "Medical Staff"],
+	["Christian Birgitte", "Finance Department", "+91 90909 90909", "christian@example.com", "Medical Staff"],
+	["Meral Elias", "Gastroenterology", "+91 90909 90909", "meral@example.com", "Medical Staff"],
+	["Deep Pau", "General Surgery", "+91 90909 90909", "deep@example.com", "Medical Staff"],
+	["Sebastiana Hani", "Haematology", "+91 90909 90909", "sebastiana@example.com", "Medical Staff"],
 ];
 
 export default function Handlers() {
