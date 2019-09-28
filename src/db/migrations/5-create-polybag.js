@@ -53,6 +53,11 @@ module.exports = {
                     key: 'handler_id',
                 },
             },
+            weight: {
+                field: 'weight',
+                type: Sequelize.FLOAT,
+                allowNull: false,
+            },
             status: {
                 field: 'status',
                 type: Sequelize.ENUM,

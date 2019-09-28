@@ -54,6 +54,11 @@ module.exports = (sequelize, DataTypes) => {
                 key: 'handler_id',
             },
         },
+        weight: {
+            field: 'weight',
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
         status: {
             field: 'status',
             type: DataTypes.ENUM,

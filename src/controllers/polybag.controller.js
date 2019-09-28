@@ -102,7 +102,7 @@ exports.addPolybag = async (req, res) => {
 			polybag.status = 'Not delivered';
 			polybag.lat = center.lat;
 			polybag.lon = center.lon;
-			//polybag = await polybag.save();
+			polybag = await polybag.save();
 
 			let message = 'Successfully added new polybag';
 			logger.info(message);

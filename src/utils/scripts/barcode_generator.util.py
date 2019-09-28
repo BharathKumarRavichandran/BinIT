@@ -33,4 +33,4 @@ barcode_image_name = ("{}_{}_{}_{}").format(hospital_id,waste_type,weight,dateti
 barcode_image_path = os.path.join(barcode_image_dir,barcode_image_name)
 
 barcode_image.save(barcode_image_path)
-print(os.path.join('images','barcode',barcode_image_name))
+print(os.path.join('images','barcode',barcode_image_name),end=".png")
