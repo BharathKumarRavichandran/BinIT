@@ -8,6 +8,32 @@ const models = require('../db/models');
 const Handler = models.handler;
 const User = models.user;
 
+exports.getDrivers = async (req, res) => {
+    try{
+        const handlers = await Handler.findAll(
+            {
+                where: { designation: "Driver" }
+            }
+        );
+
+        let message = 'Successfully retrieved drivers.';
+        logger.info(message);
+        let status_code = 200;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: message,
+            data: handlers
+        });
+    } catch(error){
+        logger.error(error.toString());
+        let status_code = 500;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: HttpStatus.getStatusText(status_code),
+            data: {}
+        });
+    }
+}
 
 exports.getList = async (req, res) => {
     try{

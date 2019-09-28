@@ -4,6 +4,7 @@ const router = require('express').Router();
 const wmcController = require('../controllers/wmc.controller');
 
 // Prefix route: /wmc
+router.get('/wmc/list/all', wmcController.getWMCList);
 router.get('/logs/get', wmcController.getAccessLogs);
 
 module.exports = router;

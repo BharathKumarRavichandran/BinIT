@@ -11,9 +11,10 @@ from barcode.writer import ImageWriter
 barcode_type = 'code128'
 
 # Set input params
-hospital_id = sys.argv[1] or '1770050001'
-waste_type  = sys.argv[2] or 'Red'
-weight      = sys.argv[3] or 20
+hospital_id     = sys.argv[1]
+waste_type      = sys.argv[2]
+weight          = sys.argv[3]
+wmc_center_name = sys.argv[4]
 
 # Set date and time params
 date_today = datetime.datetime.now().strftime('%d-%m-%Y')
@@ -21,7 +22,7 @@ datetime_now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 date_today = str(date_today)
 datetime_now = str(datetime_now)
 
-print_data = ("{} {} {}Kg {}").format(hospital_id,waste_type,str(weight),date_today)
+print_data = ("{} {} {}Kg {}").format(hospital_id,waste_type,str(weight),wmc_center_name,date_today)
 
 # Write image
 code128 = barcode.get_barcode_class(barcode_type)

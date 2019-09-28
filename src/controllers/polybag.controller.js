@@ -57,7 +57,6 @@ exports.getList = async (req, res) => {
 
 exports.addPolybag = async (req, res) => {
 	try {
-		console.log(req.body);
 		if (!req.body.to || !req.body.handler_id || !req.body.type || !req.body.weight) {
 			logger.warn('Invalid parameters');
 			let status_code = 400;
@@ -89,30 +88,40 @@ exports.addPolybag = async (req, res) => {
 		let weight = sanitize(req.body.weight);
 
 		const barcodeScriptPath = path.join(config.directory.BASE_DIR,'src','utils','scripts','barcode_generator.util.py');
-		const barcodeGenProcess = spawn('python3', [barcodeScriptPath, center.center_id,type,weight]);
+		const barcodeGenProcess = spawn('python3', [barcodeScriptPath, center.center_id,type,weight,toCenter.name]);
 		barcodeGenProcess.stdout.on('data', (data) => {
 			const barcodePath = data.toString();
 			// TODO: Add weight to blockchain
 
 			let polybag = new Polybag();
 			polybag.barcode_image_path = barcodePath;
+			polybag.barcode = 'barcode_hash';
 			polybag.from = user.center_id;
-			polybag.to = toCenter.center_id
+			polybag.to = toCenter.center_id;
 			polybag.handler_id = bagHandler.handler_id;
 			polybag.status = 'Not delivered';
+			polybag.type = type;
+			polybag.weight = weight;
 			polybag.lat = center.lat;
 			polybag.lon = center.lon;
-			polybag = await polybag.save();
-
-			let message = 'Successfully added new polybag';
-			logger.info(message);
-			let status_code = 200;
-			return res.status(status_code).json({
-				status_code: status_code,
-				message: message,
-				data: polybag
+			polybag = polybag.save().then(function(polybag){
+				let message = 'Successfully added new polybag';
+				logger.info(message);
+				let status_code = 200;
+				return res.status(status_code).json({
+					status_code: status_code,
+					message: message,
+					data: polybag
+				});
+			}).catch(function(error){
+				logger.error(error.toString());
+				let status_code = 500;
+				return res.status(status_code).json({
+					status_code: status_code,
+					message: HttpStatus.getStatusText(status_code),
+					data: {}
+				});
 			});
-		
 		})		
 	} catch (error) {
 		logger.error(error.toString());
