@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import socketIOClient from "socket.io-client";	
 import { toast } from 'react-toastify';
 
-import { CircularProgress, Box, Grid, Button, Tabs, Tab, TextField, Paper } from "@material-ui/core";
+import { CircularProgress, Box, Grid, Button, Tabs, Tab, TextField, Paper, Container } from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -62,6 +62,7 @@ const Polybags = (props) => {
 	const [weight, setWeight] = useState('');
 	const [barcodeImagePath, setBarcodeImagePath] = useState('');
 	const [open, setOpen] = useState(false);
+	const [disableWeight, setDisableWeight] = useState(false);
 
 	const [handlerList, setHandlerList] = useState([4]);
 	const [wmcList, setWmcList] = useState([2,4]);
@@ -119,6 +120,7 @@ const Polybags = (props) => {
 		const socket = socketIOClient(endpoint);
 		socket.on("polybagWeightEmitted", async (data) => {
 			setWeight(data.weight);
+			setDisableWeight(true);
 		});
 		
 		async function fetchAPI() {
@@ -241,6 +243,7 @@ const Polybags = (props) => {
 										margin="normal"
 										placeholder="Weight of Polybag"
 										type="text"
+										disabled={disableWeight}
 										fullWidth
 									/>
 									<Button
@@ -268,7 +271,15 @@ const Polybags = (props) => {
             				</Typography>
 						</Toolbar>
 					</AppBar>
-					<img src={barcodeImagePath} alt={'Barcode'}/>
+					<Grid container spacing={3}>
+						<Grid item xs={4}>
+						</Grid>
+						<Grid item xs={6}>
+							<img height={200} width={500} src={barcodeImagePath} alt={'Barcode'}/>
+						</Grid>
+						<Grid item xs={2}>
+						</Grid>
+					</Grid>
 				</Dialog>
 			</>
 		);
