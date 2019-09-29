@@ -22,7 +22,7 @@ datetime_now = datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 date_today = str(date_today)
 datetime_now = str(datetime_now)
 
-print_data = ("{} {} {}Kg {}").format(hospital_id,waste_type,str(weight),wmc_center_name,date_today)
+print_data = ("{} {} {}Kg {}").format(hospital_id,waste_type,str(weight),date_today)
 
 # Write image
 code128 = barcode.get_barcode_class(barcode_type)

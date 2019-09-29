@@ -189,9 +189,47 @@ app.post('/updateBinWeight', async (req,res) => {
 	}
 });
 
+// Emit data to UI when this API route is hit
+app.get('/addPolybagWeight', async (req,res) => {
+	try{
+		if (!req.query.weight) {
+			logger.warn('Invalid parameters');
+			let status_code = 400;
+			return res.status(status_code).json({
+				status_code: status_code,
+				message: HttpStatus.getStatusText(status_code),
+				data: {}
+			});
+		}
+
+		let data = {
+			weight: req.query.weight
+		}
+		io.sockets.emit("polybagWeightEmitted", data);
+		console.log('Emitted polybag weight');
+		let message = 'Successfully emitted polybag weight.';
+        logger.info(message);
+        let status_code = 200;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: message,
+            data: {}
+        });
+
+	} catch(error) {
+		logger.error(error.toString());
+        let status_code = 500;
+        return res.status(status_code).json({
+            status_code: status_code,
+            message: HttpStatus.getStatusText(status_code),
+            data: {}
+        });
+	}
+});
+
 
 // Emit data to UI when this API route is hit
-app.post('addPolybagWeight', async (req,res) => {
+app.post('/addPolybagWeight', async (req,res) => {
 	try{
 		if (!req.body.weight) {
 			logger.warn('Invalid parameters');
@@ -228,27 +266,43 @@ app.post('addPolybagWeight', async (req,res) => {
 	}
 });
 
-/*
+
 var Web3 = require('web3');
 app.get('/test', async (req, res) => {
 	try{ 
+		let defaultSenderAccount = '0x3F383dd876f6E5529fE5B0365dfAd33Faae84A68';
+		var contractAddress = "0x30c1388c5263e598ecBA609599527630897e71EF";
 		let web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
-		//web3.eth.DefaultAccount = web3.eth.accounts[0];
-		//console.log("default account: " + web3.eth.DefaultAccount);
+		web3.eth.DefaultAccount = defaultSenderAccount;
+		console.log("Default account: " + web3.eth.DefaultAccount);
 
-		//contract data regarding all variables / functions
+		// contract data regarding all variables / functions
 
 		var fs = require('fs');
 		var jsonFile = "/home/teslash21/CS/Github/BinIT-API/src/blockchain/build/contracts/storePolybagWeight.json";
 		var parsed= JSON.parse(fs.readFileSync(jsonFile));
 		var polybagContract = parsed.abi;
-//		var polybagContract = new web3.eth.Contract([{"constant":false,"inputs":[{"name":"_s","type":"string"}],"name":"setter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getTest","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}], "0x30c1388c5263e598ecBA609599527630897e71EF");
+		//var polybagContract = new web3.eth.Contract([{"constant":false,"inputs":[{"name":"_s","type":"string"}],"name":"setter","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getTest","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"}], "0x30c1388c5263e598ecBA609599527630897e71EF");
 
-		console.log(polybagContract);
+		var contractinstance = new web3.eth.Contract(polybagContract, contractAddress);
+		const saveWeight = await contractinstance.methods.saveData(1,web3.utils.asciiToHex(20)).send({from: defaultSenderAccount, gas: 100000});
+		console.log(saveWeight);
+
+		const getWeight = await contractinstance.methods.getData(1).send({from: defaultSenderAccount, gas: 100000});
+		console.log(getWeight);
+		
+		let message = 'Successfully stored and retrieved weight';
+		logger.info(message);
+		let status_code = 200;
+		return res.status(status_code).json({
+			status_code: status_code,
+			message: message,
+			data: {}
+		});
+		/*
 		// Contract address to be able to communicate with it
 		console.log(await polybagContract.methods.saveData(1,web3.utils.asciiToHex("20")).call());
 		console.log(await polybagContract.methods.getData(1).call());
-		
 		
 		// suppose you want to call a function named myFunction of myContract
 		var setWeight = await polybagContract.setData.getData(function (1,20));
@@ -259,13 +313,13 @@ app.get('/test', async (req, res) => {
 		// finally pass this data parameter to send Transaction
 		var test = await web3.eth.sendTransaction( {to: "0x30c1388c5263e598ecBA609599527630897e71EF", data: setWeight });
 		console.log(test);
+		*/
 		
 	} catch(error){
 		console.log(error);
 	}
 
 });
-*/
 
 
 // Route error handler
