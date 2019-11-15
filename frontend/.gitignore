@@ -1,17 +1,7 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-*.out
-
-docker/data/*
-
-.directory
-.vscode/
-node_modules/
+# dependencies
+/node_modules
 /.pnp
 .pnp.js
 .idea/
@@ -31,3 +21,7 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
