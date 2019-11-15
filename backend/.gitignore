@@ -9,7 +9,6 @@ yarn-error.log*
 
 docker/data/*
 
-.directory
 .vscode/
 node_modules/
 .env
